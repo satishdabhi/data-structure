@@ -1,0 +1,149 @@
+#include<stdio.h>
+
+#define SIZE 5
+int isEmpty();
+int isFull();
+void Push(int);
+void Display();
+int Pop();
+int stack[SIZE];
+int top=-1;
+
+void main()
+{
+
+    int ch,item;
+    while(1)
+    {
+        printf("1.Push\n");
+        printf("2.Pop\n");
+        printf("3.Peep\n");
+        printf("4.Change\n");
+        printf("5.Display\n");
+
+        printf("Choose any number:");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+            case 1:printf("\nEnter a value:");
+                   scanf("%d",&item);
+                   Push(item);
+                   break;
+            case 2:item=Pop();
+                   if(item==0)
+                   {
+                       printf("stack is Underflow\n");
+                   }
+                   else
+                   {
+                     printf("poped item is %d\n",item);
+                   }
+                   break;
+            case 3:Peep();
+                   break;
+            case 4:Change();
+                   break;
+            case 5:Display();
+                   break;
+            default:
+                printf("Invalid input\n");
+        }
+    }
+}
+int isFull()
+{
+    if(top==SIZE-1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+void Push(int ele)
+{
+    if(isFull())
+    {
+        printf("Stack is Full\n");
+    }
+    else
+    {
+    top++;
+    stack[top]=ele;
+    }
+}
+int isEmpty()
+{
+    if(top == -1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+int Pop()
+{
+    if(isEmpty())
+    {
+        return 0;
+    }
+    else
+    {
+        return stack[top--];
+    }
+}
+void Display()
+{
+    if(isEmpty())
+    {
+        printf("Stack is Underflow\n");
+    }
+    else
+    {
+        int i;
+        printf("Stack elements are\n");
+
+        for(i=0;i<=top;i++)
+        {
+            printf("%d-->",stack[i]);
+        }
+    }
+}
+
+void Peep()
+{
+    if(isEmpty())
+    {
+        printf("Stack is Empty\n");
+    }
+    else
+    {
+        printf("peek element is %d",stack[top]);
+    }
+}
+
+void Change()
+{
+    int i;
+    printf("\nEnter a location:");
+    scanf("%d",&i);
+    if(top-i+1<=0)
+    {
+        printf("Stack is underflow\n");
+
+    }
+    else
+    {
+        int ele;
+        printf("\nEnter a data:");
+        scanf("%d",&ele);
+        stack[top-i+1]=ele;
+    }
+}
